@@ -2,8 +2,7 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
-years = ['2019-09','2020','2021','2022']
-# years = ['2019']
+years = ['2021','2020','2019','2018','2017','2016','2015','2014','2013','2012','2011']
 
 def clean_score(score):
     if not(score):

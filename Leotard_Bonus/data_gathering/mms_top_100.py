@@ -28,12 +28,12 @@ def get_scores(year):
 			row_data.append(cell.text)
 		if row_data != []:
 			row_data = row_data[0:3]
+			row_data.append(year)
 			aa_scores.append(row_data)
 
 	filename = 'mms_top_100.csv'
 	with open(filename, "a+") as f:
 		writer = csv.writer(f)
-		writer.writerow([year])
 		writer.writerows(aa_scores)
 
 
