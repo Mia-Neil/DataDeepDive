@@ -6,11 +6,10 @@ def main():
 	college_data_path = "../data/ncaa_scores_09-22.csv"
 	college_df = pd.read_csv(college_data_path)
 	college_df.loc[:,'Location'] = np.where(college_df['Host'] == college_df['Team'] , 'Home', 'Away')
-	print("finished marking home away")
 	college_df = college_df.drop(['Opponents','Host'], axis=1)
 
 	df = calculate_aa_scores(college_df)
-	athletes.to_csv('../data/all_ncaa_w_aac.csv')
+	df.to_csv('../data/all_ncaa_w_aa.csv')
 
 
 def calculate_aa_scores(df):

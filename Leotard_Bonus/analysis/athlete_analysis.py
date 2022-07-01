@@ -3,52 +3,54 @@ import pandas as pd
 import numpy as np
 
 def main():
-	print("************************************************")
-	print("************ Athlete Analysis ******************")
-	print("************************************************")
+	# Gather setup import files
 	mms_data_path = "../data/mms_since_2011.csv"
 	df = pd.read_csv(mms_data_path)
 	df = df.drop(['Unique ID','MMS Club','Meet ID','Meet Name','Exclude?'], axis=1)
 
-	# college_data_path = "../data/rtn_2022.csv"
-	college_data_path = "../data/ncaa_scores_09-22.csv"
+	college_data_path = "../data/all_ncaa_w_aa.csv"
 	college_df = pd.read_csv(college_data_path)
-	college_df.loc[:,'Location'] = np.where(college_df['Host'] == college_df['Team'] , 'Home', 'Away')
-	print("finished marking home away")
-	college_df = college_df.drop(['Opponents','Host'], axis=1)
+	college_df = college_df.drop(['Unnamed: 0'], axis=1)
 
-	# name = 'Bowers, Jordan'
-	name = 'Wojcik, Natalie'
-	name_split = name.split(", ")
-	if len(name_split) > 2:
-		sys.exit("Failed on {}".format(name))
-	else:
-		name_forwards = name_split[1]+ ' ' + name_split[0]
+	athlete_name_path = '../data/mms_top_100.csv'
+	athlete_names = pd.read_csv(athlete_name_path)
+	athlete_names = athlete_names.drop(['place', 'score', 'year'], axis=1)
+	athlete_names = athlete_names.drop_duplicates(ignore_index=True)
 
-	# Level 10
-	mms_aa_scores = mms_aa_nqs(df, name)
-	print("Done with l10")
-	# College
-	df = calculate_aa_scores(college_df)
-	print("done with AA scores")
-	college_scores = calculate_athlete(df, name_forwards, 'AA')
-	school = college_scores['school']
+	output_list = []
 
-	print("Name: {}".format(name_forwards))
-	print("School: {}".format(school))
-	print("*************************************")
-	print("Level Ten Scores")
-	print("High : {}".format(mms_aa_scores[1]))
-	print("'NQS': {:.4f}".format(mms_aa_scores[0]))
-	print("*************************************")
-	print("College Scores")
-	if 'num_scores' in college_scores:
-		print("No college AA scores")
-	else:
-		if 'nqs' in college_scores:
-			print("NQS: {:.4f}".format(college_scores['nqs']))
-		print("High: {:.4f}".format(college_scores['high']))
-		print("Ave: {:.4f}".format(college_scores['ave']))
+	for index, row in athlete_names.iterrows():
+		name = row['name']
+		name_split = name.split(", ")
+		if len(name_split) > 2:
+			sys.exit("Failed on {}".format(name))
+		else:
+			name_forwards = name_split[1]+ ' ' + name_split[0]
+
+		# Level 10
+		mms_aa_scores = mms_aa_nqs(df, name)
+		college_scores = calculate_athlete(college_df, name_forwards, 'AA')
+		school = college_scores['school']
+
+		if 'num_scores' not in college_scores.keys():
+			current_athlete_output = {
+				'Name': name_forwards,
+				'School': school,
+				'L10_NQS': mms_aa_scores[0],
+				'L10_High': mms_aa_scores[1],
+				'NCAA_Average': college_scores['ave'],
+				'NCAA_High': college_scores['high']
+			}
+			if 'nqs' in college_scores.keys():
+				current_athlete_output.update({'NCAA_NQS': college_scores['nqs']})
+			else:
+				current_athlete_output.update({'NCAA_NQS': 0})
+			output_list.append(current_athlete_output)
+
+	output = pd.DataFrame.from_records(output_list)
+	output.to_csv('../data/athlete_data.csv')
+	print(output)
+
 
 def mms_aa_nqs(df, name):
 	# Get all of athlete's level 10 scores
@@ -69,50 +71,20 @@ def mms_aa_nqs(df, name):
 	nqs_average = 0
 	for index, row in athlete_results.iterrows():
 		nqs_average = nqs_average + float(row[8])/athlete_results.shape[0]
-
-	return([nqs_average, high_score])
-
-def calculate_aa_scores(df):
-	meets = df.filter(['Meet ID','Team','Location'], axis=1).drop_duplicates(subset=['Meet ID', 'Team'])
-
-	for index, row in meets.iterrows():
-		meet_id = row['Meet ID']
-		location = row['Location']
-		# df_chunk: [all scores from a given Meet ID]
-		df_chunk = df[(df['Meet ID']==meet_id)]
-
-		# If athlete has 4 scores in the meet, calculate AA Score
-		for index, value in df_chunk['Name'].value_counts().items():
-			if value == 4:
-				score = float(df_chunk[(df_chunk['Name']==index)]["Score"].sum())
-				gymnast_id = df_chunk.loc[(df_chunk['Name'] == index)].iloc[0]['Gymnast ID']
-				team = meets.loc[(meets['Meet ID'] == meet_id)].iloc[0]['Team']
-
-				aa_score = {
-				"Meet ID": meet_id,
-				"Team": team,
-				"Name": index,
-				"Gymnast ID": gymnast_id,
-				"Event": "AA",
-				"Score": '{:.3f}'.format(score),
-				"Location": location
-				}
-
-				score = pd.DataFrame(aa_score, index=[0])
-				df = pd.concat([df, score], ignore_index=True)
-	return(df)
+	return([round(nqs_average, 3), high_score])
 
 def calculate_athlete(df, athlete_name, event):
 	df_athlete = pd.DataFrame()
 	df_athlete = df.loc[(df['Name'] == athlete_name) & (df['Event'] == event)]
 	results = {}
+	if df_athlete.empty:
+		# print("No AA Scores: {}".format(athlete_name))
+		results.update({'num_scores': 0})
+		results.update({'school': 'not available'})
+		return(results)
 	school = df_athlete.iloc[0][6]
 	results.update({'school':school})
 	num_rows = df_athlete.shape[0]
-	if num_rows == 0:
-		print("No scores available for {} - {}".format(athlete_name, event))
-		results.update({'num_scores': 0})
-		return(results)
 	# Calculate high and Average
 	df_athlete = df_athlete.sort_values(by=['Score'], ascending=False)
 	high = float(df_athlete.iloc[0][9])
@@ -120,7 +92,7 @@ def calculate_athlete(df, athlete_name, event):
 	for index, row in df_athlete.iterrows():
 		ave = ave + float(row[9])
 
-	ave = round(ave/num_rows, 4)
+	ave = round(ave/num_rows, 3)
 	results.update({'high':high})
 	results.update({'ave':ave})
 
@@ -147,13 +119,9 @@ def calculate_athlete(df, athlete_name, event):
 	for index, row in nqs.iterrows():
 		nqs_average = nqs_average + float(row[9])/5
 
-	nqs = round(nqs_average, 4)
+	nqs = round(nqs_average, 3)
 	results.update({'nqs':nqs})
-	# results = {
-	# 	"nqs": nqs,
-	# 	"high": high,
-	# 	"ave": ave
-	# }
+
 	return(results)
 
 if __name__ == '__main__':

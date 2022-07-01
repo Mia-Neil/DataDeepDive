@@ -1,3 +1,4 @@
+place,score,name,year
 1,39.250,"Spicer, Rachel",2011
 2,39.000,"Spicer, Rachel",2011
 3,38.975,"Hall, Lloimincia",2011
@@ -103,8 +104,6 @@
 96,38.300,"Mann, Caitlin",2011
 96,38.300,"Sims, Carley",2011
 96,38.300,"Williams, Kayla",2011
-,2011
-,2011
 1,39.025,"Lee, Sophia",2012
 1,39.025,"Scaman, Haley",2012
 3,39.000,"Bailey, Katie",2012
@@ -212,8 +211,6 @@
 93,38.400,"Sims, Aja",2012
 93,38.400,"Slappey, Emma",2012
 93,38.400,"Wellick, Amanda",2012
-,2012
-,2012
 1,39.300,"Snead, Sydney",2013
 2,39.125,"Timothy, Oni",2013
 3,39.025,"Brannan, Mackenzie",2013
@@ -322,8 +319,6 @@
 97,38.425,"McNair, Nicolette",2013
 97,38.425,"Mulligan, Danielle",2013
 97,38.425,"Roe, Haylee",2013
-,2013
-,2013
 1,39.450,"Skinner, MyKayla",2014
 2,39.300,"Baker, Kennedy",2014
 3,39.025,"Lee, Kari",2014
@@ -430,8 +425,6 @@
 99,38.375,"Ramirez, Lauren",2014
 99,38.375,"Smith, Ashley",2014
 99,38.375,"Zaziski, Paige",2014
-,2014
-,2014
 1,39.375,"DeGuzman, Kaitlin",2015
 2,39.300,"Boren, Alicia",2015
 3,39.200,"Toronjo, Macy",2015
@@ -537,8 +530,6 @@
 97,38.450,"Peterson, Mariah",2015
 97,38.450,"Rivers, Kai",2015
 97,38.450,"Stone, Jamie",2015
-,2015
-,2015
 1,39.225,"Flam, Rachael",2016
 2,39.075,"Edney, Kennedi",2016
 3,39.050,"Carey, Jade",2016
@@ -640,8 +631,6 @@
 92,38.475,"Reinstadtler, Melissa",2016
 92,38.475,"Stevens, Cassie",2016
 92,38.475,"Wojcik, Natalie",2016
-,2016
-,2016
 1,39.275,"Flam, Rachael",2017
 2,39.125,"Scott, Shaylah",2017
 2,39.125,"Wojcik, Natalie",2017
@@ -748,8 +737,6 @@
 95,38.575,"Waligora, Matilyn",2017
 95,38.575,"Webb, Anastasia",2017
 95,38.575,"Widner, Chloe",2017
-,2017
-,2017
 1,39.275,"Levi, Jordan",2018
 2,39.225,"Li, Andrea",2018
 3,39.175,"Wilson, Gabryel",2018
@@ -855,8 +842,6 @@
 93,38.575,"Ruiz, Alexandria",2018
 93,38.575,"Sabados, Adeline",2018
 93,38.575,"Thompson, Hallie",2018
-,2018
-,2018
 1,39.400,"Johnson, Kiya",2019
 2,39.375,"Doggette, Makarri",2019
 3,39.350,"Brooks, Sierra",2019
@@ -957,8 +942,6 @@
 94,38.700,"Vore, Jacey",2019
 99,38.450,"Eaker, Kara",2019
 99,38.450,"Smith, Lily",2019
-,2019
-,2019
 1,39.275,"Vore, Jacey",2020
 2,39.100,"Vore, Jacey",2020
 3,39.075,"Harris, Selena",2020
@@ -1061,8 +1044,6 @@
 95,38.550,"Paradise, Jordyn",2020
 95,38.550,"Piedrahita, Ava",2020
 95,38.550,"Theodorou, Alexandra",2020
-,2020
-,2020
 1,39.600,"Blakely, Sloane",2021
 2,39.375,"Smith, Leah",2021
 3,39.300,"Theodorou, Alexandra",2021
@@ -1166,5 +1147,3 @@
 97,38.700,"Sievers, Danielle",2021
 97,38.700,"Stallings, Hannah",2021
 97,38.700,"Ulrich, Madison",2021
-,2021
-,2021
