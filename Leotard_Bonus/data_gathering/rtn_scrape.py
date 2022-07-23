@@ -7,7 +7,7 @@ years = ['2022', '2021', '2019', '2018', '2017', '2016',
 '2008', '2007', '2006', '2005', '2004', '2003', '2002',
 '2001', '2000', '1999', '1998']
 
-years = ['2021']
+years = ['2022']
 list_of_rows = []
 headers = ['Season','Meet ID','Meet Date','Host','Opponents','Meet Name','Gymnast ID','Name','Team','Event','RQS','Score']
 list_of_rows.append(headers)
@@ -117,7 +117,7 @@ for year in years:
                     list_of_rows.append(row)
 
 years_text='-'.join(years)
-csv_file = "../data/rtn_2021.csv"
+csv_file = "../data/rtn_2022.csv"
 with open(csv_file, 'w') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(list_of_rows)

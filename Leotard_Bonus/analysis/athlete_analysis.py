@@ -13,8 +13,8 @@ def main():
 	college_df = pd.read_csv(college_data_path)
 	college_df = college_df.drop(['Unnamed: 0'], axis=1)
 
-	# name_data_path = '../data/c-mms_athlete_names.csv'
-	name_data_path = 'athlete_list_test.csv'
+	name_data_path = '../data/c-mms_athlete_names.csv'
+	# name_data_path = 'athlete_list_test.csv'
 	athlete_names = pd.read_csv(name_data_path)
 	athlete_names = athlete_names.drop_duplicates(ignore_index=True)
 
@@ -66,56 +66,28 @@ def main():
 				'NCAA_High_FX': college_scores['FX_high'],
 				'NCAA_Ave_FX': college_scores['FX_ave']
 			}
+
 			for event in events:
 				key_name = event + '_nqs'
+				delta_key_name = event + '_delta'
+				delta = round(current_athlete_output['NCAA_Ave_'+event]-current_athlete_output['L10_Ave_'+event],3)
 				if key_name in college_scores.keys():
 					current_athlete_output.update({key_name: college_scores[key_name]})
 				else:
 					current_athlete_output.update({key_name: 0})
+				current_athlete_output.update({delta_key_name: delta})
 
 			output_list.append(current_athlete_output)
 
 	# Setup output files
-	aa_fields = ('Name','School','L10_High_AA', 'L10_Ave_AA', 'Freshman', 'NCAA_High_AA', 'NCAA_Ave_AA', 'AA_nqs')
-	vt_fields = ('Name','School','L10_High_VT', 'L10_Ave_VT', 'Freshman', 'NCAA_High_VT', 'NCAA_Ave_VT', 'VT_nqs')
-	ub_fields = ('Name','School','L10_High_UB', 'L10_Ave_UB', 'Freshman', 'NCAA_High_UB', 'NCAA_Ave_UB', 'UB_nqs')
-	bb_fields = ('Name','School','L10_High_BB', 'L10_Ave_BB', 'Freshman', 'NCAA_High_BB', 'NCAA_Ave_BB', 'BB_nqs')
-	fx_fields = ('Name','School','L10_High_FX', 'L10_Ave_FX', 'Freshman', 'NCAA_High_FX', 'NCAA_Ave_FX', 'FX_nqs')
-
-	aa_output_list = []
-	vt_output_list = []
-	ub_output_list = []
-	bb_output_list = []
-	fx_output_list = []
-	for item in output_list:
-		aa_output = {k:item[k] for k in aa_fields if k in item}
-		aa_output_list.append(aa_output)
-		vt_output = {k:item[k] for k in vt_fields if k in item}
-		vt_output_list.append(vt_output)
-		ub_output = {k:item[k] for k in ub_fields if k in item}
-		ub_output_list.append(ub_output)
-		bb_output = {k:item[k] for k in bb_fields if k in item}
-		bb_output_list.append(bb_output)
-		fx_output = {k:item[k] for k in fx_fields if k in item}
-		fx_output_list.append(fx_output)
-
-	aa_output = pd.DataFrame.from_records(aa_output_list)
-	vt_output = pd.DataFrame.from_records(vt_output_list)
-	ub_output = pd.DataFrame.from_records(ub_output_list)
-	bb_output = pd.DataFrame.from_records(bb_output_list)
-	fx_output = pd.DataFrame.from_records(fx_output_list)
-	# output.to_csv('../data/output/athlete_data.csv')
-	print(aa_output)
-	print(vt_output)
-	print(ub_output)
-	print(bb_output)
-	print(fx_output)
-
-	aa_output.to_csv('../data/output/athlete_data_aa.csv')
-	vt_output.to_csv('../data/output/athlete_data_vt.csv')
-	ub_output.to_csv('../data/output/athlete_data_ub.csv')
-	bb_output.to_csv('../data/output/athlete_data_bb.csv')
-	fx_output.to_csv('../data/output/athlete_data_fx.csv')
+	for event in events:
+		event_fields = ('Name','School','L10_High_'+event, 'L10_Ave_'+event, 'Freshman', 'NCAA_High_'+event, 'NCAA_Ave_'+event, event+'_nqs', event+'_delta')
+		curr_event_output_list = []
+		for item in output_list:
+			curr_event_output_list.append({k:item[k] for k in event_fields if k in item})
+		event_output = pd.DataFrame.from_records(curr_event_output_list)
+		event_output.to_csv('../data/output/athlete_data_'+event+'_2.csv')
+	print("*** Completed Successfully ***")
 
 def mms_aa_nqs(df, name):
 	events = ['AA','VT','UB','BB','FX']
