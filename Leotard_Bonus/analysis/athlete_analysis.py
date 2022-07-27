@@ -70,7 +70,8 @@ def main():
 			for event in events:
 				key_name = event + '_nqs'
 				delta_key_name = event + '_delta'
-				delta = round(current_athlete_output['NCAA_Ave_'+event]-current_athlete_output['L10_Ave_'+event],3)
+				# delta = round(current_athlete_output['NCAA_Ave_'+event]-current_athlete_output['L10_Ave_'+event],3)
+				delta = round(current_athlete_output['NCAA_High_'+event]-current_athlete_output['L10_High_'+event],3)
 				if key_name in college_scores.keys():
 					current_athlete_output.update({key_name: college_scores[key_name]})
 				else:

@@ -61,12 +61,13 @@ def main():
 			'AA Delta': get_delta(aa_data, school, year, 'AA')
 		}
 
-		if current_row['VT Delta'] == 1000 and current_row['UB Delta'] == 1000 and \
-			current_row['BB Delta'] == 1000 and current_row['FX Delta'] == 1000 and \
-			current_row['AA Delta'] == 1000:
-			no_deltas_count = no_deltas_count + 1
-		else:
-			output_list.append(current_row)
+		# if current_row['VT Delta'] == 1000 and current_row['UB Delta'] == 1000 and \
+		# 	current_row['BB Delta'] == 1000 and current_row['FX Delta'] == 1000 and \
+		# 	current_row['AA Delta'] == 1000:
+		# 	no_deltas_count = no_deltas_count + 1
+		# else:
+		# 	output_list.append(current_row)
+		output_list.append(current_row)
 
 	pd_output = pd.DataFrame.from_records(output_list)
 	print(pd_output)
