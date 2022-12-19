@@ -32,7 +32,6 @@ def main():
 		# graph_conference(school_data, conference)
 		graph_conference_delta(school_data, conference)
 
-
 def get_range_schools(data, high, low):
 	print("Finding schools ranked {} to {}".format(high, low))
 	rank_data_path = '../data/output/school_final_ranks.csv'
@@ -43,6 +42,7 @@ def get_range_schools(data, high, low):
 	lines = []
 
 	for index,row in schools.iterrows():
+		print(row['Team'])
 		school_ranks = data.loc[data['School'] == row['Team']]
 		school_ranks = school_ranks[['School', 'Year', 'Final Rank']]
 		ave_rank = round(school_ranks["Final Rank"].mean(skipna=True))
@@ -63,7 +63,6 @@ def graph_conference_delta(school_data, conference):
 	bb_delta = select_for_chart(school_data, conference, 'BB Delta')
 	fx_delta = select_for_chart(school_data, conference, 'FX Delta')
 	rank_data = select_for_chart(school_data, conference, 'Final Rank')
-	print(rank_data)
 	lowest_rank = rank_data.max().max()
 	lowest_rank = 5 * round(rank_data.max().max()/5) + 5
 	fig, axes = plt.subplots(nrows=2, ncols=3, constrained_layout=True)

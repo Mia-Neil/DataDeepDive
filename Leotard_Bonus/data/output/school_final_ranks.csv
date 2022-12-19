@@ -717,7 +717,6 @@ West Chester,2013,71,68,69,68,69
 West Virginia,2013,21,46,21,26,29
 Western Michigan,2013,44,31,55,53,45
 William & Mary,2013,60,53,57,52,57
-Wilson College,2013,83,83,83,83,
 Winona State,2013,77,73,74,74,75
 Yale,2013,62,62,64,65,64
 Air Force,2012,62,53,60,60,59
@@ -799,7 +798,6 @@ West Chester,2012,68,66,63,70,67
 West Virginia,2012,20,28,27,21,21
 Western Michigan,2012,33,37,52,38,39
 William & Mary,2012,54,49,65,59,57
-Wilson College,2012,82,82,82,82,82
 Winona State,2012,75,76,76,76,77
 Yale,2012,67,58,61,65,64
 Air Force,2011,54,51,55,66,58
@@ -816,7 +814,6 @@ Bridgeport,2011,51,53,47,49,53
 Brockport,2011,70,67,67,71,68
 Brown,2011,64,57,64,60,63
 BYU,2011,25,20,24,36,27
-Cal State-Fullerton,2011,58,63,60,62,64
 California,2011,57,45,44,50,50
 Centenary College,2011,53,56,65,63,56
 Central Michigan,2011,26,26,26,24,23
@@ -882,7 +879,6 @@ West Chester,2011,72,70,73,73,72
 West Virginia,2011,17,34,35,21,36
 Western Michigan,2011,44,36,36,38,37
 William & Mary,2011,62,66,57,57,65
-Wilson College,2011,82,82,82,82,82
 Winona State,2011,73,74,77,77,76
 Yale,2011,77,71,69,70,70
 Air Force,2010,60,58,61,63,59
@@ -899,7 +895,6 @@ Bridgeport,2010,45,53,42,34,53
 Brockport,2010,68,66,68,68,68
 Brown,2010,69,65,60,59,66
 BYU,2010,29,30,24,36,33
-Cal State-Fullerton,2010,47,39,56,60,50
 California,2010,58,57,54,55,55
 Centenary College,2010,59,64,67,61,64
 Central Michigan,2010,21,31,22,19,22
@@ -965,7 +960,6 @@ West Chester,2010,75,77,75,73,76
 West Virginia,2010,31,32,31,33,26
 Western Michigan,2010,61,48,47,49,52
 William & Mary,2010,57,56,64,65,58
-Wilson College,2010,83,81,83,82,81
 Winona State,2010,74,76,72,76,75
 Yale,2010,65,63,62,58,65
 Air Force,2009,55,63,65,62,61
@@ -982,7 +976,6 @@ Bridgeport,2009,58,58,55,56,59
 Brockport,2009,68,68,67,69,68
 Brown,2009,67,65,64,64,65
 BYU,2009,51,53,45,53,50
-Cal State-Fullerton,2009,33,42,52,45,42
 California,2009,57,60,47,60,57
 Centenary College,2009,59,50,63,55,56
 Central Michigan,2009,34,23,35,32,23
@@ -1008,7 +1001,6 @@ Michigan,2009,24,13,20,9,14
 Michigan State,2009,31,28,27,17,22
 Minnesota,2009,38,15,10,31,28
 Missouri,2009,11,19,15,16,13
-MIT,2009,77,73,75,76,76
 Nebraska,2009,15,14,17,6,17
 New Hampshire,2009,26,25,34,38,34
 North Carolina,2009,25,20,22,42,29
@@ -1049,6 +1041,5 @@ West Chester,2009,78,77,79,77,79
 West Virginia,2009,17,21,33,29,25
 Western Michigan,2009,55,52,59,57,53
 William & Mary,2009,61,62,61,63,60
-Wilson College,2009,84,84,84,84,84
 Winona State,2009,74,75,71,75,73
 Yale,2009,75,74,66,67,71
